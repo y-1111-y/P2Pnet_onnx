@@ -30,15 +30,13 @@ def get_args_parser():
     return parser
 
 if __name__ == '__main__':
-    os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-
-
-
+   
     parser = argparse.ArgumentParser('P2PNet export script', parents=[get_args_parser()])
     args = parser.parse_args()
     print('args', args)
     device = args.device
-
+    if device == 'cpu':
+        os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
     model = build_model(args)
     # move to device
     model.to(device)
