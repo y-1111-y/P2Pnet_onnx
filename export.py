@@ -16,7 +16,7 @@ def get_args_parser():
     parser.add_argument('--line', default=2, type=int,
                         help="line number of anchor points")
 
-    parser.add_argument('--img-size', nargs='+', type=int, default=[2944, 3968], help='image size')  # height, width
+    parser.add_argument('--img-size', nargs='+', type=int, default=[1280, 1280], help='image size')  # height, width
 
     parser.add_argument('--batch-size', type=int, default=1, help='batch size')
 
@@ -59,7 +59,7 @@ if __name__ == '__main__':
                   input_names=[input_name],
                   output_names=[pred_logits, pred_points],
                   dynamic_axes={
-                      input_name: {0: 'batch_size', 2: 'in_width', 3: 'int_height'},
+                      input_name: {0: 'batch_size'},
                       pred_logits: {0: 'batch_size'},
                       pred_points: {0: 'batch_size'}}
                   )
