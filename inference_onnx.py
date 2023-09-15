@@ -14,12 +14,7 @@ def process_one_image(dir_path, img_name, transform, session):#此函数默认ba
     img_path = os.path.join(dir_path, img_name)
     img_raw = Image.open(img_path).convert('RGB')
     width, height = img_raw.size #PIL image 宽在前高在后，tensor高在前宽在后
-    if width < height:#调整方向，防止图片失真
-        img_raw = img_raw.transpose(Image.ROTATE_90)
-    width, height = img_raw.size
-    new_width = width // 128 * 128
-    new_height = height // 128 * 128
-    img_raw = img_raw.resize((new_width, new_height), Image.ANTIALIAS)
+    img_raw = img_raw.resize((1280, 1280), Image.ANTIALIAS)
     # pre-proccessing
     img = transform(img_raw)
     samples = torch.Tensor(img).unsqueeze(0)
